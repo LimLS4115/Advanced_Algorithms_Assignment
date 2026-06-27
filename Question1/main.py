@@ -17,8 +17,9 @@ def system_menu():
     print("[1] Display Medicines")
     print("[2] Insert Medicine")
     print("[3] Search Medicine")
-    print("[4] Performance Comparison")
-    print("[5] Exit")
+    print("[4] Edit Medicine")
+    print("[5] Performance Comparison")
+    print("[0] Exit")
 
 def validate_id(hash_table):
     valid = False
@@ -109,33 +110,80 @@ def insert_medicine(hash_table, medicine_array):
     print("Medicine inserted successfully.")
 
 def search_medicine(hash_table):
+    id = input("Enter Medicine ID: M")
 
-    valid = False
-
-    while not valid:
-
-        id = input("Enter Medicine ID: M")
-
-        if not id.isdigit():
-            print("Please enter numbers only.")
-        elif int(id) <= 0:
-            print("ID must be greater than 0.")
-        else:
-            valid = True
+    if not id.isdigit():
+        print("Invalid Medicine ID")
+        return
 
     medicine_id = "M" + id
+
     result = hash_table.search(medicine_id)
 
-    if result:
-        print("\nMedicine found.")
-        print("ID:", result.medicine_id)
-        print("Name:", result.name)
-        print("Category:", result.category)
-        print(f"Price: RM {result.price:.2f}")
-        print("Quantity:", result.quantity)
-
-    else:
+    if result is None:
         print("\nMedicine not found.")
+        return
+
+    print("\nMedicine found.")
+    print("Medicine ID:", result.medicine_id)
+    print("Name:", result.name)
+    print("Category:", result.category)
+    print(f"Price: RM {result.price:.2f}")
+    print("Quantity:", result.quantity)
+
+
+def edit_medicine(hash_table):
+
+    id = input("Enter Medicine ID: M")
+
+    if not id.isdigit():
+        print("Invalid Medicine ID")
+        return
+
+    medicine_id = "M" + id
+
+    medicine = hash_table.search(medicine_id)
+
+    if medicine is None:
+        print("Medicine not found.")
+        return
+
+    choice = ""
+    while choice != "5":
+        print("\nChoose field to edit:")
+        print("1. Name")
+        print("2. Category")
+        print("3. Price")
+        print("4. Quantity")
+        print("5. Back to Main Menu")
+        choice = input("\nEnter choice (1-5): ")
+
+        if choice == "1":
+            print("Current name:", medicine.name)
+            medicine.name = validate_name()
+            print("Medicine name updated successfully.")
+
+        elif choice == "2":
+            print("Current category:", medicine.category)
+            medicine.category = validate_category()
+            print("Medicine category updated successfully.")
+
+        elif choice == "3":
+            print(f"Current price: RM {medicine.price:.2f}")
+            medicine.price = validate_price()
+            print("Medicine price updated successfully.")
+
+        elif choice == "4":
+            print("Current quantity:", medicine.quantity)
+            medicine.quantity = validate_quantity()
+            print("Medicine quantity updated successfully.")
+
+        elif choice == "5":
+            print("Back to main menu.")
+            return
+
+        else:
+            print("\nInvalid Choice. Please enter number 1-5.")
 
 def compare(hash_table, medicine_array):
     print("\n------- Performance Comparison -------")
@@ -189,9 +237,9 @@ def main():
     # Pharmacy Inventory Menu
     choice = ""
 
-    while choice != "5":
+    while choice != "0":
         system_menu() # Display menu
-        choice = input("Enter your choice (1-5): ")
+        choice = input("\nEnter your choice (1-5) or 0 to exit: ")
 
         if choice == "1":
             hash_table.display()
@@ -200,11 +248,13 @@ def main():
         elif choice == "3":
             search_medicine(hash_table)
         elif choice == "4":
-            compare(hash_table, medicine_array)
+            edit_medicine(hash_table)
         elif choice == "5":
-            print("Thank you for using the Pharmacy Inventory System.") # Exit
+            compare(hash_table, medicine_array)
+        elif choice == "0":
+            print("\nThank you for using the Pharmacy Inventory System.") # Exit
         else:
-            print("Invalid Choice. Please enter number 1-5.")
+            print("\nInvalid Choice. Please enter number 0-5.")
 
 if __name__ == "__main__":
     main()
