@@ -131,7 +131,7 @@ def search_medicine(hash_table):
         print("ID:", result.medicine_id)
         print("Name:", result.name)
         print("Category:", result.category)
-        print("Price:", result.price)
+        print(f"Price: RM {result.price:.2f}")
         print("Quantity:", result.quantity)
 
     else:
@@ -144,21 +144,28 @@ def compare(hash_table, medicine_array):
 
     for key in test_keys:
         # Measure array search execution time
-        start = time.perf_counter_ns()  # Start timer
-        array_search(medicine_array, key)
-        end = time.perf_counter_ns()  # Stop timer
+        # Record the start time
+        start = time.perf_counter_ns()
+
+        for i in range(10000):
+            array_search(medicine_array, key)
+
+        # Record the end time
+        end = time.perf_counter_ns()
 
         # Calculate execution time
         array_time = end - start
 
         # Measure hash table search execution time
         start = time.perf_counter_ns()
-        hash_table.search(key)
+
+        for i in range(10000):
+            hash_table.search(key)
+
         end = time.perf_counter_ns()
         hash_time = end - start
 
         print(key, "| Array:", array_time, "ns", "| Hash:", hash_time, "ns")
-
 
 def main():
     # Create Hash Table

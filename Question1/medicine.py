@@ -8,10 +8,4 @@ class Medicine:
 
     # Define how a medicine object is displayed
     def __str__(self):
-        return(
-            f"{self.medicine_id} "
-            f"{self.name} "
-            f"{self.category} "
-            f"RM{self.price:.2f} "
-            f"Quantity: {self.quantity}"
-        )
+        return(f"{self.medicine_id} {self.name} {self.category} {self.price} {self.quantity}")

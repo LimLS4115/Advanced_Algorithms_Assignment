@@ -6,8 +6,12 @@ class HashTable:
         self.table = [None] * size  # Create empty buckets
 
     def hash_function(self, key):
-        number = (int(key[1:]) * 31)       # Convert M001 -> 001 -> 1
-        return number % self.size   # Calculate index position
+        # Convert "M001" to integer 1
+        number = int(key[1:])
+
+        # Calculate the bucket index
+        return number % self.size
+
 
     def insert(self, medicine):
 
@@ -43,12 +47,16 @@ class HashTable:
         print("")
         print(f"{'Medicine List':^60}")
         print("-" * 60)
-        print(f"{'ID':<6}{'Name':<20}{'Category':<15}{'Price':<10}{'Quantity':<15}")
+        print(f"{'ID':<7}{'Name':<18}{'Category':<12}{'Price (RM)':<12}{'Quantity':<10}")
         print("-" * 60)
 
         for item in self.table:
 
             if item is not None:
-                print(f"{item.medicine_id:<6}{item.name:<20}{item.category:<15}{item.price:<10.2f}{item.quantity:<15}")
+                print(f"{item.medicine_id:<7}"
+                      f"{item.name:<18}"
+                      f"{item.category:<12}"
+                      f"{item.price:>10.2f}"
+                      f"{item.quantity:>10}")
 
         print("-" * 60)
