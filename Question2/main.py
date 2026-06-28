@@ -110,12 +110,7 @@ def main():
                 else:
                     target = int(target)
 
-                    result = binary_search(
-                        sorted_transactions,
-                        target,
-                        0,
-                        len(sorted_transactions) - 1
-                    )
+                    result = binary_search(sorted_transactions, target, 0, len(sorted_transactions) - 1)
 
                     if result:
                         print("\nTransaction found")
@@ -129,34 +124,27 @@ def main():
                         print("\nTransaction not found")
 
         elif choice == "4":
-            if not is_sorted:
-                print("\nPlease sort the transactions first.")
-            else:
-                target = input("Enter Transaction ID to search: ")
 
-                if not target.isdigit():
-                    print("Invalid ID. Please try again.")
+            target = input("Enter Transaction ID to search: ")
+
+            if not target.isdigit():
+                print("Invalid ID. Please try again.")
+
+            else:
+                target = int(target)
+
+                result = linear_search(transactions, target)
+
+                if result:
+                    print("\nTransaction found")
+                    print("Transaction ID:", result.transaction_id)
+                    print("Customer Name:", result.customer_name)
+                    print("Product Name:", result.product_name)
+                    print(f"Amount: RM {result.amount:.2f}")
+                    print("Transaction Date:", result.transaction_date)
 
                 else:
-                    target = int(target)
-
-                    result = binary_search(
-                        sorted_transactions,
-                        target,
-                        0,
-                        len(sorted_transactions) - 1
-                    )
-
-                    if result:
-                        print("\nTransaction found")
-                        print("Transaction ID:", result.transaction_id)
-                        print("Customer Name:", result.customer_name)
-                        print("Product Name:", result.product_name)
-                        print(f"Amount: RM {result.amount:.2f}")
-                        print("Transaction Date:", result.transaction_date)
-
-                    else:
-                        print("\nTransaction not found")
+                    print("\nTransaction not found")
 
         elif choice == "5":
             compare_performance()
