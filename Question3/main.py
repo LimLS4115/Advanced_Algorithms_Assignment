@@ -12,7 +12,7 @@ def test_multithreading():
         time_taken = run_multithreading()
         total += time_taken
 
-        print(f"Round {round_number:<3}: {time_taken:<7} ns")
+        print(f"Round {round_number:<3}: {time_taken:>7} ns")
 
     # Calculate the average execution time
     average = total / 10
