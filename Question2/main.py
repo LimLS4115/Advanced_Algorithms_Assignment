@@ -81,6 +81,7 @@ def main():
 
         if choice == "1":
             display_transactions(sorted_transactions)
+
         elif choice == "2":
             print("\nBefore Sorting")
             display_transactions(sorted_transactions)
