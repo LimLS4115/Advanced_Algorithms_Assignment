@@ -186,9 +186,10 @@ def edit_medicine(hash_table):
             print("\nInvalid Choice. Please enter number 1-5.")
 
 def compare(hash_table, medicine_array):
-    print("\n------- Performance Comparison -------")
+    print("\n---------- Performance Comparison ----------")
 
-    test_keys = ["M001","M002","M003", "M004","M005","M999"]
+    test_keys = [medicine.medicine_id for medicine in medicine_array]
+    test_keys.append("M999")
 
     for key in test_keys:
         # Measure array search execution time
@@ -227,7 +228,12 @@ def main():
         Medicine("M002","Cetirizine","Tablet", 10.00, 60),
         Medicine("M003","Vitamin C","Supplement", 25.90, 80),
         Medicine("M004","Fish Oil","Supplement", 50.00, 40),
-        Medicine("M005","Benadryl","Syrup", 40.00, 35)
+        Medicine("M005","Benadryl","Syrup", 40.00, 35),
+        Medicine("M006", "Copastin", "Tablet", 5.50, 85),
+        Medicine("M007", "Loratadine", "Tablet", 8.00, 20),
+        Medicine("M008", "Dyriton", "Syrup", 13.20, 45),
+        Medicine("M009", "Dyriton", "Tablet", 2.00, 30),
+        Medicine("M010", "Paracil", "Tablet", 1.50, 120)
     ]
 
     for medicine in sample_data:
